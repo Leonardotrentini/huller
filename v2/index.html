@@ -32,90 +32,210 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://connect.facebook.net">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Montserrat',sans-serif;background:#0a0a0a;color:#fff;overflow-x:hidden;line-height:1.4;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased}
-        .container{max-width:1400px;margin:0 auto;padding:0 20px}
+        html,body{height:100%}
+        body{
+            font-family:'Montserrat',sans-serif;
+            background:#0a0a0a;
+            color:#fff;
+            line-height:1.4;
+            -webkit-tap-highlight-color:transparent;
+            -webkit-font-smoothing:antialiased;
+            min-height:100svh;
+            display:flex;
+            flex-direction:column;
+            overflow-x:hidden;
+        }
+        /* brilho dourado de fundo */
+        body::before{
+            content:'';
+            position:fixed;
+            top:-30%;
+            left:50%;
+            transform:translateX(-50%);
+            width:120vmax;
+            height:120vmax;
+            background:radial-gradient(circle,rgba(201,169,97,.18) 0%,rgba(201,169,97,.05) 35%,transparent 65%);
+            pointer-events:none;
+            z-index:0;
+        }
+        .wrap{
+            position:relative;
+            z-index:1;
+            flex:1;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+            max-width:780px;
+            margin:0 auto;
+            padding:24px 20px;
+            width:100%;
+        }
 
-        header{padding:30px 0 20px;text-align:center;border-bottom:1px solid rgba(255,255,255,.1)}
-        .logo{max-width:120px;margin:0 auto}
+        .logo{max-width:90px;margin:0 auto 26px}
         .logo img{width:100%;height:auto;filter:invert(1) brightness(2)}
 
-        .badge{display:inline-block;padding:12px 30px;background:transparent;border:2px solid #c9a961;color:#c9a961;font-size:.85rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:40px}
+        .badge{
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            padding:9px 22px;
+            background:rgba(201,169,97,.08);
+            border:1px solid rgba(201,169,97,.45);
+            color:#c9a961;
+            font-size:.72rem;
+            font-weight:700;
+            letter-spacing:.18em;
+            text-transform:uppercase;
+            border-radius:50px;
+            margin-bottom:28px;
+        }
+        .badge .dot{width:7px;height:7px;border-radius:50%;background:#c9a961;box-shadow:0 0 8px #c9a961;animation:pulse 2s infinite}
+        @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
-        .hero{padding:60px 0 50px;text-align:center}
-        .headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,10vw,7rem);line-height:.95;font-weight:400;letter-spacing:.02em;margin-bottom:30px;text-transform:uppercase}
+        .headline{
+            font-family:'Bebas Neue',sans-serif;
+            font-size:clamp(2.6rem,9vw,5.5rem);
+            line-height:.92;
+            font-weight:400;
+            letter-spacing:.01em;
+            margin-bottom:22px;
+            text-transform:uppercase;
+        }
         .headline-white{color:#fff;display:block}
-        .headline-gold{color:#c9a961;display:block}
+        .headline-gold{
+            background:linear-gradient(90deg,#e7c97a,#c9a961,#b08d3f);
+            -webkit-background-clip:text;
+            background-clip:text;
+            -webkit-text-fill-color:transparent;
+            display:block;
+        }
 
-        .subheadline{font-size:clamp(1rem,2.2vw,1.4rem);color:#b0b0b0;max-width:850px;margin:0 auto 60px;font-weight:500;line-height:1.6}
+        .subheadline{
+            font-size:clamp(.95rem,2.2vw,1.25rem);
+            color:#c4c4c4;
+            max-width:560px;
+            margin:0 auto 30px;
+            font-weight:500;
+            line-height:1.6;
+        }
         .subheadline strong{color:#fff;font-weight:700}
 
-        .cta-section-bottom{text-align:center;padding:50px 0 80px}
-        .cta-button{display:inline-flex;align-items:center;justify-content:center;padding:22px 60px;background:#c9a961;color:#0a0a0a;font-size:clamp(1rem,2vw,1.3rem);font-weight:800;text-transform:uppercase;text-decoration:none;letter-spacing:.05em;transition:background .3s,color .3s,transform .3s;border:3px solid #c9a961;min-height:48px}
-        .cta-button:hover{background:transparent;color:#c9a961;transform:translateY(-3px)}
+        /* trust row */
+        .trust{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:14px 26px;
+            margin-bottom:38px;
+        }
+        .trust-item{
+            display:flex;
+            align-items:center;
+            gap:8px;
+            font-size:.82rem;
+            font-weight:600;
+            color:#e0e0e0;
+        }
+        .trust-item svg{width:18px;height:18px;flex-shrink:0;color:#c9a961}
+
+        .cta-button{
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            padding:21px 54px;
+            background:linear-gradient(90deg,#e7c97a,#c9a961);
+            color:#0a0a0a;
+            font-size:clamp(1rem,2vw,1.25rem);
+            font-weight:800;
+            text-transform:uppercase;
+            text-decoration:none;
+            letter-spacing:.04em;
+            transition:transform .25s,box-shadow .25s;
+            border-radius:8px;
+            box-shadow:0 8px 30px rgba(201,169,97,.35);
+            min-height:48px;
+        }
+        .cta-button:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(201,169,97,.5)}
         .cta-button svg{width:24px;height:24px;margin-right:10px;flex-shrink:0}
 
-        @media(max-width:768px){
-            header{padding:20px 0 15px}
-            .logo{max-width:70px}
-            .hero{padding:25px 0 20px}
-            .badge{padding:8px 18px;font-size:.65rem;margin-bottom:20px}
-            .headline{font-size:clamp(1.8rem,10vw,3.5rem);margin-bottom:15px}
-            .subheadline{font-size:clamp(.85rem,3.5vw,1rem);margin-bottom:25px;line-height:1.5}
-            .cta-section-bottom{padding:30px 0 50px}
-            .cta-button{padding:16px 35px;font-size:.95rem;width:100%;max-width:320px}
+        .cta-note{
+            margin-top:16px;
+            font-size:.78rem;
+            color:#888;
+            font-weight:500;
+            letter-spacing:.02em;
         }
+
         @media(max-width:480px){
-            header{padding:15px 0 12px;border-bottom:1px solid rgba(255,255,255,.08)}
-            .logo{max-width:60px}
-            .hero{padding:20px 0 15px}
-            .badge{padding:6px 14px;font-size:.6rem;margin-bottom:15px;letter-spacing:.1em}
-            .headline{font-size:1.6rem;margin-bottom:12px;line-height:.92}
-            .subheadline{font-size:.8rem;margin-bottom:20px;line-height:1.4;padding:0 5px}
-            .cta-section-bottom{padding:25px 0 40px}
-            .cta-button{padding:14px 30px;font-size:.85rem;max-width:100%;letter-spacing:.03em}
-            .cta-button svg{width:20px;height:20px;margin-right:8px}
+            .wrap{padding:20px 18px}
+            .logo{max-width:62px;margin-bottom:20px}
+            .badge{padding:7px 16px;font-size:.6rem;margin-bottom:20px;letter-spacing:.12em}
+            .headline{font-size:clamp(2.2rem,11vw,3rem);margin-bottom:16px}
+            .subheadline{font-size:.9rem;margin-bottom:22px;line-height:1.5}
+            .trust{gap:10px 18px;margin-bottom:28px}
+            .trust-item{font-size:.74rem}
+            .cta-button{padding:17px 36px;font-size:.95rem;width:100%;max-width:340px}
+            .cta-note{font-size:.72rem}
         }
         @media(max-width:375px){
-            header{padding:12px 0 10px}
-            .logo{max-width:55px}
-            .hero{padding:15px 0 12px}
-            .badge{padding:5px 12px;font-size:.55rem;margin-bottom:12px}
-            .headline{font-size:1.4rem;margin-bottom:10px}
-            .subheadline{font-size:.75rem;margin-bottom:18px}
-            .cta-button{padding:13px 28px;font-size:.8rem}
+            .logo{max-width:55px;margin-bottom:16px}
+            .headline{font-size:2rem;margin-bottom:14px}
+            .subheadline{font-size:.84rem;margin-bottom:18px}
+            .trust{margin-bottom:22px}
+        }
+        @media(max-height:680px){
+            .logo{margin-bottom:14px}
+            .badge{margin-bottom:16px}
+            .headline{margin-bottom:14px}
+            .subheadline{margin-bottom:18px}
+            .trust{margin-bottom:22px}
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">
-                <img src="/logo-huller.png" alt="Huller Atacado FC" width="120" height="120" loading="eager">
+    <main class="wrap">
+        <div class="logo">
+            <img src="/logo-huller.png" alt="Huller Atacado FC" width="90" height="90" loading="eager">
+        </div>
+
+        <div class="badge"><span class="dot"></span>Confecção Própria &middot; Atacado para Todo o Brasil</div>
+
+        <h1 class="headline">
+            <span class="headline-white">Compre Direto da Fábrica</span>
+            <span class="headline-gold">e Triplique Sua Margem</span>
+            <span class="headline-gold">na Revenda</span>
+        </h1>
+
+        <p class="subheadline">
+            Peças de <strong>qualidade premium</strong> com o <strong>menor preço de atacado real</strong> do mercado. Sem atravessadores, sem pedido mínimo alto &mdash; o lucro fica todo com você.
+        </p>
+
+        <div class="trust">
+            <div class="trust-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                Confecção própria
             </div>
-        </header>
+            <div class="trust-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                Preço de fábrica
+            </div>
+            <div class="trust-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                Envio para todo Brasil
+            </div>
+        </div>
 
-        <section class="hero">
-            <div class="badge">&#x1F1E7;&#x1F1F7; Atacado Para Todo o Brasil</div>
-            <h1 class="headline">
-                <span class="headline-white">Confecção Própria com</span>
-                <span class="headline-gold">Qualidade de Marca Premium</span>
-                <span class="headline-gold">e Preço de Atacado Real</span>
-            </h1>
-            <p class="subheadline">
-                Aqui você encontra as melhores peças do mercado, com <strong>alta qualidade e preço justo</strong>, garantindo <strong>margem de lucro</strong> na revenda.
-            </p>
-        </section>
-
-        <section class="cta-section-bottom">
-            <a href="https://wa.me/5547999498006?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20quero%20conhecer%20a%20Huller!" class="cta-button" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                Falar com Atendente
-            </a>
-        </section>
-    </div>
+        <a href="https://wa.me/5547999498006?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20quero%20conhecer%20a%20Huller!" class="cta-button" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Quero Comprar no Atacado
+        </a>
+        <p class="cta-note">Atendimento rápido pelo WhatsApp &middot; Resposta em minutos</p>
+    </main>
 </body>
 </html>
